@@ -1,0 +1,25 @@
+{
+  "name": "koa2-file-upload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "nodemon --inspect server.js --watch server.js",
+    "serv": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async-busboy": "^0.5.0",
+    "koa": "^2.2.0",
+    "koa-better-body": "^3.0.2",
+    "koa-bodyparser": "^4.2.0",
+    "koa-multer": "^1.0.1",
+    "koa-router": "^7.1.1",
+    "koa-send": "^4.1.0",
+    "koa-static": "^3.0.0",
+    "koa2-file-upload": "^0.1.15",
+    "nodemon": "^1.11.0"
+  }
+}
