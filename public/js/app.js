@@ -2,25 +2,33 @@
 
 	var uploadURL = '/api/upload',
 		form = document.querySelector('.form'),
-		fileInput = document.querySelector('.form #fileInput');
+		fileInput = document.querySelector('.form #fileInput'),
+		picURL = '',
+		blob = null,
+		buffer = null;
 
 	fileInput.addEventListener('change', function(e) {
 		var file = e.target.files[0];
 		console.log(file);
 		var reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onload = function(event) {
-			// var blob = new Blob([event.target.result], { type: 'image/*' });
-			preview.src = event.target.result;
+		reader.readAsArrayBuffer(file);
+		reader.onload = function(e) {
+			console.log(this);
+			buffer = this.result;
+			var blob = new Blob([buffer], { type: 'image/png' });
+			picURL = window.URL.createObjectURL(blob);
+			preview.src = picURL;
+
 		};
 	});
 
-	function upload(file) {
+	function upload(data) {
 		var xhr = new XMLHttpRequest();
 		// обработчик для закачки
-		xhr.upload.onprogress = function(event) {
-			progress.innerText = event.loaded + ' / ' + event.total;
-		}
+		xhr.upload.onprogress = function(e) {
+			console.log(e);
+			progress.innerText = e.loaded + ' / ' + e.total;
+		};
 
 		// обработчики успеха и ошибки
 		// если status == 200, то это успех, иначе ошибка
@@ -32,14 +40,14 @@
 			}
 		};
 
-		xhr.open('POST', uploadURL, true);
-		xhr.send(file);
+		xhr.open('POST', uploadURL);
+		xhr.send(data);
 	}
 
 	form.addEventListener('submit', function(e) {
 		e.preventDefault();
 		var file = fileInput.files[0];
-		upload(file);
+		upload(blob);
 	});
 
 })();
