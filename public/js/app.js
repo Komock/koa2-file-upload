@@ -3,14 +3,19 @@
 	var uploadURL = '/api/upload',
 		form = document.querySelector('.form'),
 		fileInput = document.querySelector('.form #fileInput'),
+<<<<<<< HEAD
 		picURL = '',
 		blob = null,
 		buffer = null;
+=======
+		picURL = '';
+>>>>>>> 35f396f73d9285a61359132f6e4594e1d5f0d077
 
 	fileInput.addEventListener('change', function(e) {
 		var file = e.target.files[0];
 		console.log(file);
 		var reader = new FileReader();
+<<<<<<< HEAD
 		reader.readAsArrayBuffer(file);
 		reader.onload = function(e) {
 			console.log(this);
@@ -19,15 +24,26 @@
 			picURL = window.URL.createObjectURL(blob);
 			preview.src = picURL;
 
+=======
+		reader.readAsDataURL(file);
+		reader.onload = function(event) {
+			picURL = event.target.result;
+			preview.src = picURL;
+>>>>>>> 35f396f73d9285a61359132f6e4594e1d5f0d077
 		};
 	});
 
 	function upload(data) {
 		var xhr = new XMLHttpRequest();
 		// обработчик для закачки
+<<<<<<< HEAD
 		xhr.upload.onprogress = function(e) {
 			console.log(e);
 			progress.innerText = e.loaded + ' / ' + e.total;
+=======
+		xhr.upload.onprogress = function(event) {
+			progress.innerText = event.loaded + ' / ' + event.total;
+>>>>>>> 35f396f73d9285a61359132f6e4594e1d5f0d077
 		};
 
 		// обработчики успеха и ошибки
@@ -41,13 +57,21 @@
 		};
 
 		xhr.open('POST', uploadURL);
+<<<<<<< HEAD
 		xhr.send(data);
+=======
+		xhr.send(file);
+>>>>>>> 35f396f73d9285a61359132f6e4594e1d5f0d077
 	}
 
 	form.addEventListener('submit', function(e) {
 		e.preventDefault();
 		var file = fileInput.files[0];
+<<<<<<< HEAD
 		upload(blob);
+=======
+		upload(picURL);
+>>>>>>> 35f396f73d9285a61359132f6e4594e1d5f0d077
 	});
 
 })();

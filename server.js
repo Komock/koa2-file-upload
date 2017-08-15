@@ -68,7 +68,7 @@ Router.post('/api/upload', async (ctx, next) => {
 	// });
 
 
-	ctx.body = 'Loaded!';
+	ctx.response.body = 'Loaded!';
 });
 
 
